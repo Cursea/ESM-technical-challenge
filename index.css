@@ -1,0 +1,8 @@
+body {
+  background-color: #f6f101;
+  color: #2f221c;
+}
+
+form * {
+  display: block;
+}
