@@ -1,6 +1,24 @@
 body {
-  background-color: #f6f101;
-  color: #2f221c;
+  background-color: #2f221c;
+  color: #f6f101;
+  margin: 0 auto;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 150px auto 150px;
+  grid-gap: 1em;
+}
+
+header,
+#customerForm,
+footer {
+  background: #c14040;
+  grid-column: 1 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25vh;
 }
 
 form * {
