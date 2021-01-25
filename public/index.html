@@ -12,22 +12,22 @@
         <h2>API data read/write challenge</h2>
       </header>
       <div id="customerForm">
-        <form action="">
-          <label for="forename">First Name</label>
-          <input type="text" id="forename" name="forename" autocomplete="off" />
+        <form action="/submit-form" method="POST">
+          <label for="forename">First name</label>
+          <input type="text" id="forename" name="forename" />
           <label for="surname">Surname</label>
-          <input type="text" id="surname" name="surname" autocomplete="off" />
-          <label for="emailAddress">Email Address</label>
-          <input
-            type="email"
-            id="emailAddress"
-            name="emailAddress"
-            autocomplete="off"
-          />
-          <input type="submit" value="submit" />
+          <input type="text" id="surname" name="surname" />
+          <label for="emailAddress">Email address</label>
+          <input type="email" id="emailAddress" name="emailAddress" />
+          <input type="submit" value="Submit" />
         </form>
       </div>
-      <footer>Marco Burman | 2021 | ESM Inbound skills test</footer>
+      <footer>
+        Marco Burman | 2021 |&nbsp;<a
+          href="https://github.com/Cursea/ESM-technical-challenge"
+          >ESM Inbound skills test</a
+        >
+      </footer>
     </div>
   </body>
 </html>
