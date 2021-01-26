@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const storage = require('./googleSheetsService')
 
 router.get('/', (request, response) => {
   response.sendFile('public/index.html', { root: __dirname })
@@ -8,9 +9,11 @@ router.get('/', (request, response) => {
 router.post('/submit-form', (request, response) => {
   const body = request.body
 
-  response.status(201)
-  response.send(body)
-  response.end()
+  console.log(body)
+  const arr = [body.forename, body.surname, body.emailAddress]
+  storage(arr)
+
+  response.status(201).end()
 })
 
 module.exports = router

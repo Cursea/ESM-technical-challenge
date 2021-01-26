@@ -8,13 +8,14 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = 'token.json'
-
-// Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err)
-  // Authorize a client with credentials, then call the Google Sheets API.
-  authorize(JSON.parse(content), updateSheetData)
-})
+function update(data) {
+  // Load client secrets from a local file.
+  fs.readFile('credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err)
+    // Authorize a client with credentials, then call the Google Sheets API.
+    authorize(JSON.parse(content), updateSheetData, data)
+  })
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -22,7 +23,7 @@ fs.readFile('credentials.json', (err, content) => {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
+function authorize(credentials, callback, callbackData) {
   const { client_secret, client_id, redirect_uris } = credentials.installed
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
@@ -34,7 +35,7 @@ function authorize(credentials, callback) {
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getNewToken(oAuth2Client, callback)
     oAuth2Client.setCredentials(JSON.parse(token))
-    callback(oAuth2Client)
+    callback(oAuth2Client, callbackData)
   })
 }
 
@@ -75,7 +76,7 @@ function getNewToken(oAuth2Client, callback) {
  * @see https://docs.google.com/spreadsheets/d/1YxSQJtAqrW8ivFhU4ISgSr8-xIBEkXMLP-mTb1w2gtk/edit
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
-function updateSheetData(auth) {
+function updateSheetData(auth, data) {
   const sheets = google.sheets({ version: 'v4', auth })
   sheets.spreadsheets.values.update(
     {
@@ -83,13 +84,17 @@ function updateSheetData(auth) {
       range: 'Sheet1!A2:C2',
       valueInputOption: 'USER_ENTERED',
       resource: {
-        values: [['testName', 'testSurname', 'testEmail']],
+        values: [data],
       },
     },
-    (err, res) => {
-      if (err) return console.log('The API returned an error: ' + err)
+    (err, result) => {
+      if (err) {
+        return console.log('The API returned an error: ' + err)
+      } else {
+        console.log(`${result.data.updatedCells} cells appended.`)
+      }
     }
   )
 }
 
-module.exports = updateSheetData
+module.exports = update
