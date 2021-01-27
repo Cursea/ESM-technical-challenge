@@ -40,6 +40,10 @@ form input:not([type='submit']) {
   color: #ffffff;
 }
 
+input[type='submit'] {
+  cursor: pointer;
+}
+
 footer a {
   text-decoration: none;
 }

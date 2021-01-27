@@ -13,10 +13,10 @@ router.get('/submit-form', (request, response) => {
 
 router.post('/submit-form', (request, response) => {
   const body = request.body
-
   console.log(body)
-  const arr = [body.forename, body.surname, body.emailAddress]
-  storage(arr)
+
+  const formContent = [body.forename, body.surname, body.emailAddress]
+  storage(formContent)
 
   response.status(201).end()
 })

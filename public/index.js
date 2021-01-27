@@ -8,7 +8,7 @@ document.forms['signupForm'].addEventListener('submit', (event) => {
     body: new URLSearchParams(new FormData(event.target)), // event.target is the form
   })
     .then((resp) => {
-      return resp.json() // or resp.text() or whatever the server sends
+      return console.log(resp.text()) // or resp.json(); whatever the server sends
     })
     .then((body) => {
       // TODO handle body
