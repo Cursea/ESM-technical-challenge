@@ -7,7 +7,7 @@ router.get('/', (request, response) => {
   response.sendFile('public/index.html', { root: __dirname })
 })
 
-router.get('/submit-form', (request, response) => {
+router.get('/details', (request, response) => {
   response.sendFile('public/submit-form.html', { root: __dirname })
 })
 
