@@ -1,14 +1,14 @@
 const { request } = require('express')
 const express = require('express')
 const router = express.Router()
-const storage = require('./googleSheetsService')
+const storage = require('./google-service')
 
 router.get('/', (request, response) => {
   response.sendFile('public/index.html', { root: __dirname })
 })
 
 router.get('/details', (request, response) => {
-  response.sendFile('public/submit-form.html', { root: __dirname })
+  response.sendFile('public/user-details.html', { root: __dirname })
 })
 
 router.post('/submit-form', (request, response) => {
