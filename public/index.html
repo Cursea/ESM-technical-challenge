@@ -8,10 +8,10 @@
   </head>
   <body>
     <div id="container">
-      <header>
+      <header class="flex">
         <h2>API data read/write challenge</h2>
       </header>
-      <div id="customerForm">
+      <div id="customerForm" class="flex">
         <form id="signupForm" action="/submit-form" method="POST">
           <label for="forename">First name</label>
           <input type="text" id="forename" name="forename" required />
@@ -21,17 +21,18 @@
           <input type="email" id="emailAddress" name="emailAddress" required />
           <input type="submit" value="Submit" />
         </form>
-        <div id="successMessage" class="hidden">
-          <p>
-            Form data successfully submitted  to
-            <a
-              href="https://docs.google.com/spreadsheets/d/1YxSQJtAqrW8ivFhU4ISgSr8-xIBEkXMLP-mTb1w2gtk/edit#gid=0"
-              >'ESM test' google sheet</a
-            >
-          </p>
-        </div>
       </div>
-      <footer>
+      <div id="successMessage" class="hidden">
+        <p>
+          Form data successfully submitted to google sheet:
+          <a
+            target="_blank"
+            href="https://docs.google.com/spreadsheets/d/1YxSQJtAqrW8ivFhU4ISgSr8-xIBEkXMLP-mTb1w2gtk/edit#gid=0"
+            >'ESM test'</a
+          >
+        </p>
+      </div>
+      <footer class="flex">
         Marco Burman | 2021 |&nbsp;<a
           href="https://github.com/Cursea/ESM-technical-challenge"
           >ESM Inbound skills test</a

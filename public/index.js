@@ -1,6 +1,7 @@
 document.forms['signupForm'].addEventListener('submit', (event) => {
   event.preventDefault()
   document.querySelector('#successMessage').classList.remove('hidden')
+  document.querySelector('#successMessage').classList.add('flex')
 
   fetch(event.target.action, {
     method: 'POST',

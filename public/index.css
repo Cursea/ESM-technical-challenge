@@ -1,7 +1,11 @@
 body {
-  background-color: #2f221c;
-  color: #f6f101;
+  background-color: #202020;
+  color: #ffffff;
   margin: 0 auto;
+}
+
+a {
+  color: #ffdf6c;
 }
 
 #container {
@@ -10,10 +14,8 @@ body {
   grid-gap: 1em;
 }
 
-header,
-#customerForm,
-footer {
-  background: #c14040;
+.flex {
+  background: #3f3f3f;
   grid-column: 1 / 4;
   display: flex;
   align-items: center;
@@ -21,10 +23,23 @@ footer {
   height: auto;
 }
 
+.hidden {
+  display: none;
+}
+
 form * {
   display: block;
 }
 
-.hidden {
-  display: none;
+form label {
+  color: #ffffff;
+}
+
+form input:not([type='submit']) {
+  background-color: #707070;
+  color: #ffffff;
+}
+
+footer a {
+  text-decoration: none;
 }
