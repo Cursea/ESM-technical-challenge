@@ -8,7 +8,7 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = process.env.GOOGLE_TOKEN || 'token.json'
+const TOKEN_PATH = 'token.json'
 
 function update(data) {
   const credentials = process.env.GOOGLE_CREDENTIALS
@@ -40,12 +40,17 @@ function authorize(credentials, callback, callbackData) {
     redirect_uris[0]
   )
 
-  // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return getNewToken(oAuth2Client, callback)
-    oAuth2Client.setCredentials(JSON.parse(token))
+  if (process.env.GOOGLE_TOKEN) {
+    oAuth2Client.setCredentials(JSON.parse(process.env.GOOGLE_TOKEN))
     callback(oAuth2Client, callbackData)
-  })
+  } else {
+    // Check if we have previously stored a token.
+    fs.readFile(TOKEN_PATH, (err, token) => {
+      if (err) return getNewToken(oAuth2Client, callback)
+      oAuth2Client.setCredentials(JSON.parse(token))
+      callback(oAuth2Client, callbackData)
+    })
+  }
 }
 
 /**
