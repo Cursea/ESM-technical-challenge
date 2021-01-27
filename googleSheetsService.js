@@ -9,16 +9,21 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = 'token.json'
+
 function update(data) {
-  // Load client secrets from a local file.
-  fs.readFile(
-    'process.env.GOOGLE_CREDENTIALS' || 'credentials.json',
-    (err, content) => {
+  const credentials = process.env.GOOGLE_CREDENTIALS
+
+  // Try to load client secrects from .env, if exists, else check credentials.json
+  if (credentials) {
+    authorize(JSON.parse(credentials), updateSheetData, data)
+  } else {
+    // Load client secrets from a local file.
+    fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err)
       // Authorize a client with credentials, then call the Google Sheets API.
       authorize(JSON.parse(content), updateSheetData, data)
-    }
-  )
+    })
+  }
 }
 
 /**
